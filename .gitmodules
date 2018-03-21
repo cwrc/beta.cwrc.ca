@@ -149,10 +149,11 @@
         url = https://github.com/cwrc/islandora_cwrc_basexdb.git
 [submodule "sites/default/modules/islandora_cwrc_document"]
         path = sites/default/modules/islandora_cwrc_document
-        url = https://github.com/jefferya/islandora_cwrc_document.git
+        url = https://github.com/cwrc/islandora_cwrc_document.git
 [submodule "sites/default/modules/islandora_cwrc_writer"]
         path = sites/default/modules/islandora_cwrc_writer
-        url = https://github.com/jefferya/islandora_cwrc_writer.git
+        url = https://github.com/cwrc/islandora_cwrc_writer.git
+        branch = master
 [submodule "sites/default/modules/custom/islandora_object_field"]
         path = sites/default/modules/custom/islandora_object_field
         url = https://github.com/cwrc/islandora_object_field.git
@@ -355,7 +356,7 @@
         url = https://github.com/cwrc/islandora_cwrc_xslt_library.git
 [submodule "sites/default/modules/islandora_xslt_paths"]
         path = sites/default/modules/islandora_xslt_paths
-        url = https://github.com/jefferya/islandora_xslt_paths.git
+        url = https://github.com/cwrc/islandora_xslt_paths.git
 [submodule "sites/default/modules/custom/cwrc_field_filler"]
         path = sites/default/modules/custom/cwrc_field_filler
         url = https://github.com/cwrc/cwrc_field_filler.git
