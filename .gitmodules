@@ -152,7 +152,7 @@
         url = https://github.com/cwrc/islandora_cwrc_document.git
 [submodule "sites/default/modules/islandora_cwrc_writer"]
         path = sites/default/modules/islandora_cwrc_writer
-        url = https://github.com/cwrc/islandora_cwrc_writer.git
+        url = https://github.com/cwrc/Islandora-CWRC-Writer.git
         branch = master
 [submodule "sites/default/modules/custom/islandora_object_field"]
         path = sites/default/modules/custom/islandora_object_field
