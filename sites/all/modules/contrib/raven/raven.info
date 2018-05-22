@@ -1,0 +1,15 @@
+name = "Raven"
+description = "Raven is an exception logging client for Sentry (sentry.io)."
+core = 7.x
+package = Development
+dependencies[] = libraries (2.x)
+dependencies[] = xautoload (5.x)
+configure = admin/config/development/raven
+files[] = raven.test
+
+; Information added by Drupal.org packaging script on 2018-02-13
+version = "7.x-2.6"
+core = "7.x"
+project = "raven"
+datestamp = "1518562384"
+
