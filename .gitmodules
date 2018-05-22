@@ -10,7 +10,7 @@
 [submodule "sites/default/libraries/basex-api"]
         path = sites/default/libraries/basex-api
         url = https://github.com/cwrc/basex-api.git
-[submodule "sites/default/modules/custom/block_islandora_options"]
+[submodule "sites/all/modules/custom/block_islandora_options"]
         path = sites/all/modules/custom/block_islandora_options
         url = https://github.com/echidnacorp/block_islandora_options.git
 [submodule "sites/all/libraries/bookreader"]
@@ -138,7 +138,7 @@
         path = sites/default/modules/custom/de_contextual_help
         url = https://github.com/cwrc/de_contextual_help.git
         branch = develop
-[submodule "sites/default/modules/custom/islandora_blocks"]
+[submodule "sites/all/modules/custom/islandora_blocks"]
         path = sites/all/modules/custom/islandora_blocks
         url = https://github.com/echidnacorp/islandora_blocks
 [submodule "sites/default/modules/islandora_collection_search"]
