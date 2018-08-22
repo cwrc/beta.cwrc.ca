@@ -9,3 +9,11 @@ sites/digitalpage.ca
 sites/modernistcommons.ca/
 sites/spanishcivilwar.ca/
 sites/thepeopleandthetext.ca/
+
+.htpasswd
+
+sites/daviesdiaries.ca.stage.cwrc.ca
+sites/digitalpage.ca.stage.cwrc.ca
+sites/modernistcommons.ca.stage.cwrc.ca
+sites/spanishcivilwar.ca.stage.cwrc.ca
+sites/thepeopleandthetext.ca.stage.cwrc.ca
