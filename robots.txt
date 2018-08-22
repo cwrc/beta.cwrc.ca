@@ -88,3 +88,16 @@ Disallow: /?q=user/password/
 Disallow: /?q=user/register/
 Disallow: /?q=user/login/
 Disallow: /?q=user/logout/
+
+# Slow down the crawlers to 10 minutes per crawl hit
+User-agent: BLEXBot
+Crawl-delay: 600000
+
+User-agent: dotbot
+Crawl-delay: 600000
+
+User-agent: Yandex
+Crawl-delay: 600000
+
+
+
