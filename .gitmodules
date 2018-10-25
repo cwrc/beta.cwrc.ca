@@ -128,6 +128,9 @@
         path = sites/default/modules/custom/cwrc_xacml
         url = https://github.com/cwrc/cwrc_xacml.git
         branch = develop
+[submodule "sites/default/libraries/cwrc_entity_management_forms_static"]
+        path = sites/default/libraries/cwrc_entity_management_forms_static
+        url = https://github.com/cwrc/cwrc-entity-management-forms-static.git
 [submodule "sites/default/libraries/CWRC-Mapping-Timelines-Project"]
         path = sites/default/libraries/CWRC-Mapping-Timelines-Project
         url = https://github.com/cwrc/CWRC-Mapping-Timelines-Project.git
@@ -366,3 +369,6 @@
 [submodule "sites/all/modules/islandora_bagit_extension"]
 	path = sites/all/modules/islandora_bagit_extension
 	url = https://github.com/cwrc/islandora_bagit_extension.git
+[submodule "sites/default/libraries/cwrc-entity-management-forms-static"]
+	path = sites/default/libraries/cwrc-entity-management-forms-static
+	url = https://github.com/cwrc/cwrc-entity-management-forms-static.git
