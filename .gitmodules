@@ -372,3 +372,6 @@
 [submodule "sites/default/libraries/cwrc-entity-management-forms-static"]
 	path = sites/default/libraries/cwrc-entity-management-forms-static
 	url = https://github.com/cwrc/cwrc-entity-management-forms-static.git
+[submodule "sites/default/modules/cwrc_dtoc_edition"]
+	path = sites/default/modules/cwrc_dtoc_edition
+	url = https://github.com/cwrc/cwrc_dtoc_edition.git
