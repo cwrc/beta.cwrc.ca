@@ -375,3 +375,6 @@
 [submodule "sites/default/modules/cwrc_islandora_bagit"]
 	path = sites/default/modules/cwrc_islandora_bagit
 	url = https://github.com/cwrc/cwrc_islandora_bagit.git
+[submodule "sites/default/modules/cwrc_dtoc_edition"]
+	path = sites/default/modules/cwrc_dtoc_edition
+	url = https://github.com/cwrc/cwrc_dtoc_edition.git
