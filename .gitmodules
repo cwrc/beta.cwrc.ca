@@ -378,3 +378,6 @@
 [submodule "sites/default/modules/cwrc_dtoc_edition"]
 	path = sites/default/modules/cwrc_dtoc_edition
 	url = https://github.com/cwrc/cwrc_dtoc_edition.git
+[submodule "sites/default/modules/custom/tk_label"]
+	path = sites/default/modules/custom/tk_label
+	url = https://github.com/cwrc/tk_label.git
