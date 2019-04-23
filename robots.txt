@@ -97,7 +97,10 @@ User-agent: dotbot
 Crawl-delay: 600000
 
 User-agent: Yandex
-Crawl-delay: 600000
+Disallow: /
 
+User-agent: MJ12bot
+Disallow: /
 
-
+User-agent: SemrushBot
+Disallow: /
