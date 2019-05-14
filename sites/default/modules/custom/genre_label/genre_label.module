@@ -1,0 +1,121 @@
+<?php
+/**
+ * @file
+ * Code for the Genre Label feature.
+ */
+
+include_once 'genre_label.features.inc';
+
+
+/**
+ * Get taxonomy by the field value.
+ */
+function genre_label_get_term_by_field_value($vid, $field_name, $field_value) {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'taxonomy_term')
+        ->entityCondition('bundle', $vid, '=')
+        ->fieldCondition($field_name, 'url', $field_value, '=');
+  $result = $query->execute();
+  if (isset($result['taxonomy_term'])) {
+    $keys = array_keys($result['taxonomy_term']);
+    $tid = reset($keys);
+    $term = taxonomy_term_load($tid);
+    return $term;
+  }
+
+  return array();
+}
+
+/**
+ * Get genre taxonomy by the name.
+ */
+function genre_label_get_term($name) {
+  $query = new EntityFieldQuery;
+  $result = $query
+  ->entityCondition('entity_type', 'taxonomy_term')
+  ->propertyCondition('name', $name)
+  ->propertyCondition('vid', 5)
+  ->execute();
+  // taxonomy
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function genre_label_form_xml_form_builder_datastream_form_alter(&$form, &$form_state, $form_id) {
+
+  if(!isset($form['genre'])) {
+    return;
+  }
+
+  
+$vocabulary = taxonomy_vocabulary_machine_name_load('genre');
+  $terms = !empty($vocabulary) ? taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid)) : array();
+  $primary_genre_options = array('' => '- None -'); 
+  $subgenre_options = array('' => '- None -');
+  foreach ($terms as $key =>$term) {
+    if($term->field_genre_type[LANGUAGE_NONE][0]['value'] == 'genre') {
+      $primary_genre = field_get_items('taxonomy_term', $term, 'field_genre_url');
+     // $primary_genre_options[$primary_genre[0]['url']] = $term->name;
+      $primary_genre_options[$term->name] = $term->name;
+    }
+    else {
+      $subgenre = field_get_items('taxonomy_term', $term, 'field_genre_url');
+      $subgenre_options[$term->name] = $term->name;
+      //$subgenre_options[] = $term->name;
+    }
+  } 
+  //$terms = array('bradgenres' => array($subgenre_options, $primary_genre_options)); 
+
+  foreach ($form['genre']['primaryGenre'] as $key => $genrePanel) {
+    if (is_array($genrePanel) && $genrePanel['#type'] == 'tabpanel') {
+      $form['genre']['primaryGenre'][$key]['genre_label']['#options'] = $primary_genre_options;
+    }
+  }
+  
+  foreach ($form['genre']['subgenre'] as $key => $genrePanel) {
+    if (is_array($genrePanel) && $genrePanel['#type'] == 'tabpanel') {
+      $form['genre']['subgenre'][$key]['genre_label']['#options'] = $subgenre_options;
+    }
+  }
+  
+
+  // dpm($form['genre']);
+//  dpm($form['tk_labels'], 'tk in genre');
+//drupal_add_js($terms, 'setting');
+
+ // dpm($form['genre'], 'afto');
+//dpm($form['genre'], 'gpg');
+  array_unshift($form['update']['#submit'], 'genre_label_xml_form_builder_datastream_set_right_information_form_submit');
+}
+
+/**
+ * Set the value for the field "genre_label" and "subgenre_label" depending on the selected genres and subgenres.
+ */
+function genre_label_xml_form_builder_datastream_set_right_information_form_submit(array $form, array &$form_state) {
+   if(!isset($form['genre'])) {
+    return;
+  }
+  foreach ($form_state['values']['genre']['primaryGenre'] as $key => $genrePanel) {
+    if (is_array($genrePanel) ) {
+      $genreName = $form['genre']['primaryGenre'][$key]['genre_label']['#value'];
+      $term = taxonomy_get_term_by_name($genreName, 'genre');
+      
+      $term = reset($term);
+      $form_state['values']['genre']['primaryGenre'][$key]['valueURI'] = $term->field_genre_url['und'][0]['url'];
+    }
+  }
+  
+  foreach ($form_state['values']['genre']['subgenre'] as $key => $genrePanel) {
+    if (is_array($genrePanel)) {
+      $genreName = $form['genre']['subgenre'][$key]['genre_label']['#value'];
+      
+      $term = taxonomy_get_term_by_name($genreName, 'genre');
+      $term = reset($term);
+      $form_state['values']['genre']['subgenre'][$key]['valueURI'] = $term->field_genre_url['und'][0]['url'];
+    }
+  }
+  
+}
+
+
