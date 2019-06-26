@@ -124,13 +124,22 @@ function tk_label_change_description_ajax_callback($form, &$form_state) {
  * Set the value for the field "accessionCondition" depending on the selected tk_label.
  */
 function tk_label_xml_form_builder_datastream_set_right_information_form_submit(array $form, array &$form_state) {
+  
   if (!empty($form_state['values']['tk_labels'])) {
     $tk_labels = $form_state['values']['tk_labels'];
     foreach ($tk_labels as $key => $label) {
+      
       $term = tk_label_get_term_by_field_value('tk_label', 'field_label_uri', $label['tk_label']);
-      $field_description = field_get_items('taxonomy_term', $term, 'description_field');
-      $description = strip_tags($field_description[0]['value']);
-      $form_state['values']['tk_labels'][$key]['accessionCondition'] = $description;
+      if(empty($term)) {
+
+      }
+      else {
+        $field_description = field_get_items('taxonomy_term', $term, 'description_field');
+        $description = strip_tags($field_description[0]['value']);
+        $form_state['values']['tk_labels'][$key]['accessionCondition'] = $description;
+      }
+      
+      
     }
   }
 }
@@ -174,6 +183,7 @@ function tk_label_xml_form_builder_datastream_form_metadata_form_submit(array $f
       $form_state['redirect'] = "islandora/object/{$object->id}";
     }
   }
+  
 }
 
 /**

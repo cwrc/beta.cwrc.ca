@@ -44,31 +44,29 @@ function genre_label_get_term($name) {
  */
 function genre_label_form_xml_form_builder_datastream_form_alter(&$form, &$form_state, $form_id) {
 
-  if(!isset($form['genre'])) {
+  if(!isset($form['genre'])  ) {
     return;
   }
 
   
 $vocabulary = taxonomy_vocabulary_machine_name_load('genre');
   $terms = !empty($vocabulary) ? taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid)) : array();
-  $primary_genre_options = array('' => '- None -'); 
-  $subgenre_options = array('' => '- None -');
+  $primary_genre_options = $subgenre_options = array('null' => '- None -'); 
+
   foreach ($terms as $key =>$term) {
     if($term->field_genre_type[LANGUAGE_NONE][0]['value'] == 'genre') {
       $primary_genre = field_get_items('taxonomy_term', $term, 'field_genre_url');
-     // $primary_genre_options[$primary_genre[0]['url']] = $term->name;
       $primary_genre_options[$term->name] = $term->name;
     }
     else {
       $subgenre = field_get_items('taxonomy_term', $term, 'field_genre_url');
       $subgenre_options[$term->name] = $term->name;
-      //$subgenre_options[] = $term->name;
     }
+    
   } 
-  //$terms = array('bradgenres' => array($subgenre_options, $primary_genre_options)); 
 
   foreach ($form['genre']['primaryGenre'] as $key => $genrePanel) {
-    if (is_array($genrePanel) && $genrePanel['#type'] == 'tabpanel') {
+    if (is_array($genrePanel) && isset($genrePanel['#type']) && $genrePanel['#type'] == 'tabpanel') {
       $form['genre']['primaryGenre'][$key]['genre_label']['#options'] = $primary_genre_options;
     }
   }
@@ -79,13 +77,6 @@ $vocabulary = taxonomy_vocabulary_machine_name_load('genre');
     }
   }
   
-
-  // dpm($form['genre']);
-//  dpm($form['tk_labels'], 'tk in genre');
-//drupal_add_js($terms, 'setting');
-
- // dpm($form['genre'], 'afto');
-//dpm($form['genre'], 'gpg');
   array_unshift($form['update']['#submit'], 'genre_label_xml_form_builder_datastream_set_right_information_form_submit');
 }
 
@@ -93,29 +84,50 @@ $vocabulary = taxonomy_vocabulary_machine_name_load('genre');
  * Set the value for the field "genre_label" and "subgenre_label" depending on the selected genres and subgenres.
  */
 function genre_label_xml_form_builder_datastream_set_right_information_form_submit(array $form, array &$form_state) {
-   if(!isset($form['genre'])) {
+  
+  if(!isset($form['genre']) || !isset($form['genre']['subgenre']) ) {
     return;
   }
+ 
   foreach ($form_state['values']['genre']['primaryGenre'] as $key => $genrePanel) {
     if (is_array($genrePanel) ) {
+     if($key == 'tab' || is_int($key)) {
       $genreName = $form['genre']['primaryGenre'][$key]['genre_label']['#value'];
-      $term = taxonomy_get_term_by_name($genreName, 'genre');
-      
-      $term = reset($term);
-      $form_state['values']['genre']['primaryGenre'][$key]['valueURI'] = $term->field_genre_url['und'][0]['url'];
+      if(isset($genreName) && strlen($genreName) > 0 ) {
+        $term = taxonomy_get_term_by_name($genreName, 'genre');
+        
+        $term = reset($term);
+        $form_state['values']['genre']['primaryGenre'][$key]['valueURI'] = $term->field_genre_url['und'][0]['url'];
+      }
+      else {
+         // $form['genre']['primaryGenre'][$key]['genre_label']['#value'] = 'unset';
+         // unset($form['genre']['primaryGenre'][$key]);
+         // unset($form_state['values']['genre']['primaryGenre'][$key]);
+      }
+     }
     }
   }
   
   foreach ($form_state['values']['genre']['subgenre'] as $key => $genrePanel) {
-    if (is_array($genrePanel)) {
+    if (is_array($genrePanel) ) {
+      if($key == 'tab' || is_int($key) ) {
       $genreName = $form['genre']['subgenre'][$key]['genre_label']['#value'];
-      
-      $term = taxonomy_get_term_by_name($genreName, 'genre');
-      $term = reset($term);
-      $form_state['values']['genre']['subgenre'][$key]['valueURI'] = $term->field_genre_url['und'][0]['url'];
+         if(isset($genreName) && strlen($genreName) > 0 && $genreName != 'null' ) {  
+
+          $term = taxonomy_get_term_by_name($genreName, 'genre');
+          $term = reset($term);
+          $form_state['values']['genre']['subgenre'][$key]['valueURI'] = $term->field_genre_url['und'][0]['url'];
+
+         }
+        else {
+          // watchdog('else', '<pre>Dumping @variable </pre>', array('@variable' => print_r($form_state['values']['genre']['subgenre'], true)));
+          // unset($form_state['values']['genre']['subgenre'][$key]);
+          // unset($form['genre']['subgenre'][$key]);
+        }
+     }
     }
+    
   }
-  
 }
 
 
