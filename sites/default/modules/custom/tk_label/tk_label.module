@@ -51,6 +51,7 @@ function tk_label_render_link_icon($terms) {
   foreach ($terms as $term) {
     $url = field_get_items('taxonomy_term', $term, 'field_label_uri');
     $icon = field_get_items('taxonomy_term', $term, 'field_label_icon');
+    
     $img = array(
       '#theme' => 'image_style',
       '#style_name' => 'icon',
@@ -304,13 +305,20 @@ function _tk_label_add_stamp_labels_to_object($object, &$markup) {
 /**
  * Show TK label to object.
  */
-function _tk_label_add_tk_labels_to_object($object, &$markup) {
+function _tk_label_add_tk_labels_to_object($object, &$markup, $show_inherited = true) {
   if (!empty($object['MODS'])) {
-    $xlinks = _tk_label_get_attributes_from_xml($object['MODS']->content, '//mods:accessCondition[not(@displayLabel="inherited")]', 'xlink:href');
+    
+    if ($show_inherited) {
+      $xlinks = _tk_label_get_attributes_from_xml($object['MODS']->content, '//mods:accessCondition', 'xlink:href');
+    } else {
+      $xlinks = _tk_label_get_attributes_from_xml($object['MODS']->content, '//mods:accessCondition[not(@displayLabel="inherited")]', 'xlink:href');
+
+    }
     if (!empty($xlinks)) {
       $terms = tk_label_retrieve_term($xlinks);
       $markup .= tk_label_render_link_icon($terms);
     }
+    
   }
 }
 
