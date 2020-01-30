@@ -384,3 +384,6 @@
 [submodule "sites/default/modules/cwrc_xslt"]
 	path = sites/default/modules/cwrc_xslt
 	url = https://github.com/cwrc/cwrc_xslt.git
+[submodule "sites/default/modules/cwrc_citeproc"]
+	path = sites/default/modules/cwrc_citeproc
+	url = https://github.com/cwrc/cwrc_citeproc.git
