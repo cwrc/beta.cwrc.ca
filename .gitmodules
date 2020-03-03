@@ -348,9 +348,6 @@
 [submodule "sites/all/modules/php_lib"]
         path = sites/all/modules/php_lib
         url = git://github.com/Islandora/php_lib.git
-[submodule "sites/all/modules/tei_content"]
-        path = sites/all/modules/tei_content
-        url = http://git.drupal.org/sandbox/christof.s/1118172.git
 [submodule "sites/all/libraries/tuque"]
         path = sites/all/libraries/tuque
         url = https://github.com/Islandora/tuque.git
