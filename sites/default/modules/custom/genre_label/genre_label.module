@@ -72,7 +72,7 @@ $vocabulary = taxonomy_vocabulary_machine_name_load('genre');
   }
   
   foreach ($form['genre']['subgenre'] as $key => $genrePanel) {
-    if (is_array($genrePanel) && $genrePanel['#type'] == 'tabpanel') {
+    if (is_array($genrePanel)  && isset($genrePanel['#type']) && $genrePanel['#type'] == 'tabpanel') {
       $form['genre']['subgenre'][$key]['genre_label']['#options'] = $subgenre_options;
     }
   }
