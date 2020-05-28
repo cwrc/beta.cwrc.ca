@@ -39,6 +39,11 @@ function genre_label_get_term($name) {
   // taxonomy
 }
 
+
+function genre_label_form_xml_form_builder_ingest_form_alter(&$form, &$form_state, $form_id) {
+  genre_label_form_xml_form_builder_datastream_form_alter($form, $form_state, $form_id);
+}
+
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
@@ -49,7 +54,7 @@ function genre_label_form_xml_form_builder_datastream_form_alter(&$form, &$form_
   }
 
   
-$vocabulary = taxonomy_vocabulary_machine_name_load('genre');
+  $vocabulary = taxonomy_vocabulary_machine_name_load('genre');
   $terms = !empty($vocabulary) ? taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid)) : array();
   $primary_genre_options = $subgenre_options = array('null' => '- None -'); 
 
@@ -77,7 +82,7 @@ $vocabulary = taxonomy_vocabulary_machine_name_load('genre');
     }
   }
   
-  array_unshift($form['update']['#submit'], 'genre_label_xml_form_builder_datastream_set_right_information_form_submit');
+//  array_unshift($form['update']['#submit'], 'genre_label_xml_form_builder_datastream_set_right_information_form_submit');
 }
 
 /**
