@@ -41,7 +41,6 @@ function genre_label_get_term($name) {
 
 
 function genre_label_form_xml_form_builder_ingest_form_alter(&$form, &$form_state, $form_id) {
-  genre_label_form_xml_form_builder_datastream_form_alter($form, $form_state, $form_id);
 }
 
 /**
@@ -49,11 +48,11 @@ function genre_label_form_xml_form_builder_ingest_form_alter(&$form, &$form_stat
  */
 function genre_label_form_xml_form_builder_datastream_form_alter(&$form, &$form_state, $form_id) {
 
-  if(!isset($form['genre'])  ) {
+  if(!isset($form['genre']) && !isset($form['genre']['primaryGenre']) && !isset($form['genre']['subgenre'])  ) {
     return;
   }
 
-  
+  watchdog('bradmodule', '<pre>Dumping @variable </pre>', array('@variable' => print_r('genregenre', true)));
   $vocabulary = taxonomy_vocabulary_machine_name_load('genre');
   $terms = !empty($vocabulary) ? taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid)) : array();
   $primary_genre_options = $subgenre_options = array('null' => '- None -'); 
