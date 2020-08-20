@@ -52,7 +52,6 @@ function genre_label_form_xml_form_builder_datastream_form_alter(&$form, &$form_
     return;
   }
 
-  watchdog('bradmodule', '<pre>Dumping @variable </pre>', array('@variable' => print_r('genregenre', true)));
   $vocabulary = taxonomy_vocabulary_machine_name_load('genre');
   $terms = !empty($vocabulary) ? taxonomy_term_load_multiple(array(), array('vid' => $vocabulary->vid)) : array();
   $primary_genre_options = $subgenre_options = array('null' => '- None -'); 
@@ -98,7 +97,7 @@ function genre_label_xml_form_builder_datastream_set_right_information_form_subm
      if($key == 'tab' || is_int($key)) {
       $genreName = $form['genre']['primaryGenre'][$key]['genre_label']['#value'];
       if(isset($genreName) && strlen($genreName) > 0 && $genreName != null  ) {
-        //watchdog('tax get term by name', '<pre>Dumping @variable </pre>', array('@variable' => print_r($genreName, true)));        
+
         $term = taxonomy_get_term_by_name($genreName, 'genre');
         
         $term = reset($term);
@@ -118,14 +117,14 @@ function genre_label_xml_form_builder_datastream_set_right_information_form_subm
       if($key == 'tab' || is_int($key) ) {
       $genreName = $form['genre']['subgenre'][$key]['genre_label']['#value'];
          if(isset($genreName) && strlen($genreName) > 0 && $genreName != 'null' ) {  
-          //watchdog('second term get name', '<pre>Dumping @variable </pre>', array('@variable' => print_r($genreName, true)));
+
           $term = taxonomy_get_term_by_name($genreName, 'genre');
           $term = reset($term);
           $form_state['values']['genre']['subgenre'][$key]['valueURI'] = $term->field_genre_url['und'][0]['url'];
 
          }
         else {
-          // watchdog('else', '<pre>Dumping @variable </pre>', array('@variable' => print_r($form_state['values']['genre']['subgenre'], true)));
+
           // unset($form_state['values']['genre']['subgenre'][$key]);
           // unset($form['genre']['subgenre'][$key]);
         }
