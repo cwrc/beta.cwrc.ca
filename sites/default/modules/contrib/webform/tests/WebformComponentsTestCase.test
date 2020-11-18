@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @file
  * Webform module component tests.
  */
 class WebformComponentsTestCase extends WebformTestCase {
+
   /**
    * {@inheritdoc}
    */
@@ -19,7 +19,7 @@ class WebformComponentsTestCase extends WebformTestCase {
   /**
    * Webform module component tests.
    */
-  function testWebformComponents() {
+  public function testWebformComponents() {
     // Test webform_component_list().
     // Create a form consisting of three textfields separated by pagebreaks.
     $test_components = $this->webformComponents();
@@ -120,7 +120,6 @@ class WebformComponentsTestCase extends WebformTestCase {
     $test_parents = array($components[1], $components[2], $components[3]);
     $this->assertIdentical($parents, $test_parents, 'webform_component_parent_keys() returns expected component arrays.');
 
-
     // Test webform_get_cid().
     $settings = array(
       'title' => 'Test webform with multiple instances of a Form Key',
@@ -177,10 +176,12 @@ class WebformComponentsTestCase extends WebformTestCase {
     // Test webform_get_cid() without providing a parent cid.
     $this->assertTrue(webform_get_cid($node, 'testing_key') == array(1, 3), t('Returned expected Webform component ids array for a given form_key.'));
 
-
     // Create and visit a new Webform test node.
     $node = $this->webformForm();
     $this->drupalGet('node/' . $node->nid);
+
+    // Check th elements have the scope attribute.
+    $this->assertRaw('<th class="checkbox webform-grid-option" scope="col">', 'Grid <code>th</code> elements have @scope of "col".');
 
     // Check that each label @for points to an element.
     $labels = $this->xpath('//label/@for');
@@ -188,5 +189,14 @@ class WebformComponentsTestCase extends WebformTestCase {
       $for = $this->xpath("//*[@id=':id']", array(':id' => $label['for']));
       $this->assertTrue($for, 'Label with @for "' . $label['for'] . '" points to an element.');
     }
+
+    // Test grid headers.
+    $grid_headers = $this->xpath('//th[@class="webform-grid-question"]');
+    $this->assertIdentical(count($grid_headers), 3, 'There are three table headers with class "webform-grid-question".');
+    $grid_headers = $this->xpath('//th[@class="webform-grid-question"]/text()');
+    $this->assertIdentical(count($grid_headers), 2, 'There are two non-empty table headers with class "webform-grid-question".');
+    $this->assertIdentical((string) $grid_headers[0], 'Grid Keyed', 'The value of the left non-empty header is "Grid Keyed".');
+    $this->assertIdentical((string) $grid_headers[1], 'Grid Keyed', 'The value of the right non-empty header is the same as the left.');
   }
+
 }

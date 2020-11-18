@@ -348,9 +348,6 @@
 [submodule "sites/all/modules/php_lib"]
         path = sites/all/modules/php_lib
         url = git://github.com/Islandora/php_lib.git
-[submodule "sites/all/modules/tei_content"]
-        path = sites/all/modules/tei_content
-        url = http://git.drupal.org/sandbox/christof.s/1118172.git
 [submodule "sites/all/libraries/tuque"]
         path = sites/all/libraries/tuque
         url = https://github.com/Islandora/tuque.git
@@ -378,9 +375,12 @@
 [submodule "sites/default/modules/cwrc_dtoc_edition"]
 	path = sites/default/modules/cwrc_dtoc_edition
 	url = https://github.com/cwrc/cwrc_dtoc_edition.git
-[submodule "sites/default/modules/custom/tk_label"]
-	path = sites/default/modules/custom/tk_label
-	url = https://github.com/cwrc/tk_label.git
 [submodule "sites/default/modules/cwrc_xslt"]
 	path = sites/default/modules/cwrc_xslt
 	url = https://github.com/cwrc/cwrc_xslt.git
+[submodule "sites/default/modules/cwrc_citeproc"]
+	path = sites/default/modules/cwrc_citeproc
+	url = https://github.com/cwrc/cwrc_citeproc.git
+[submodule "sites/default/modules/custom/tk_label"]
+	path = sites/default/modules/custom/tk_label
+	url = https://github.com/cwrc/tk_label.git
