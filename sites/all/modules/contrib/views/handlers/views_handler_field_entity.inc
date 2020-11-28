@@ -51,16 +51,14 @@ class views_handler_field_entity extends views_handler_field {
    */
   public function query() {
     $this->table_alias = $base_table = $this->view->base_table;
-    $this->base_field = $this->view->base_field;
+$entity_info = entity_get_info($this->entity_type);
+$this->base_field = $entity_info['entity keys']['id'];
 
     if (!empty($this->relationship)) {
       foreach ($this->view->relationship as $relationship) {
         if ($relationship->alias == $this->relationship) {
-          $base_table = $relationship->definition['base'];
           $this->table_alias = $relationship->alias;
 
-          $table_data = views_fetch_data($base_table);
-          $this->base_field = empty($relationship->definition['base field']) ? $table_data['table']['base']['field'] : $relationship->definition['base field'];
         }
       }
     }
