@@ -182,9 +182,6 @@
 [submodule "sites/all/modules/cwrc_workflow"]
         path = sites/all/modules/cwrc_workflow
         url = https://github.com/cwrc/cwrc_workflow.git
-[submodule "sites/all/libraries/CWRC-Dialogs"]
-        path = sites/all/libraries/CWRC-Dialogs
-        url = https://github.com/cwrc/CWRC-Dialogs
 [submodule "sites/all/libraries/CWRC-Mapping-Timelines-Project"]
         path = sites/all/libraries/CWRC-Mapping-Timelines-Project
         url = https://github.com/cwrc/CWRC-Mapping-Timelines-Project.git
