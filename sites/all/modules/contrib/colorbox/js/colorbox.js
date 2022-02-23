@@ -7,7 +7,7 @@
 
 Drupal.behaviors.initColorbox = {
   attach: function (context, settings) {
-    if (!$.isFunction($.colorbox) || typeof settings.colorbox === 'undefined') {
+    if (!$.isFunction($('a, area, input', context).colorbox) || typeof settings.colorbox === 'undefined') {
       return;
     }
 
@@ -30,8 +30,19 @@ Drupal.behaviors.initColorbox = {
     };
 
     $('.colorbox', context)
-      .once('init-colorbox')
-      .colorbox(settings.colorbox);
+      .once('init-colorbox').each(function(){
+        // Only images are supported for the "colorbox" class.
+        // The "photo" setting forces the href attribute to be treated as an image.
+        var extendParams = {
+          photo: true
+        };
+        // If a title attribute is supplied, sanitize it.
+        var title = $(this).attr('title');
+        if (title) {
+          extendParams.title = Drupal.checkPlain(title);
+        }
+        $(this).colorbox($.extend({}, settings.colorbox, extendParams));
+      });
 
     $(context).bind('cbox_complete', function () {
       Drupal.attachBehaviors('#cboxLoadedContent');
