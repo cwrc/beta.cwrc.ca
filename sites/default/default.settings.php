@@ -880,4 +880,4 @@ $conf['mail_display_name_site_name'] = TRUE;
  * values. Set this variable to FALSE in order to opt out of this
  * prevention and revert to the original behaviour.
  */
-# $conf['javascript_use_double_submit_protection'] = FALSE;
+$conf['javascript_use_double_submit_protection'] = FALSE;
