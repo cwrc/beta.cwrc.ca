@@ -867,6 +867,8 @@ $conf['mail_display_name_site_name'] = TRUE;
  * This variable allows opting out of this security improvement.
  */
 # $conf['do_not_hash_session_ids'] = TRUE;
+# required for the IIIF viewer, I think 2023-12-08
+$conf['do_not_hash_session_ids'] = TRUE;
 
 /**
  * URL for update information.
