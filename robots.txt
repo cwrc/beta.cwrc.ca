@@ -20,6 +20,7 @@
 User-agent: Amazonbot               # Amazon's user agent
 Disallow: /islandora/object/*/      # disallow this directory
 Disallow: /islandora/search/        # disallow this directory
+Disallow: /fr/islandora/search/        # disallow this directory
 
 
 User-agent: *
@@ -100,3 +101,4 @@ Disallow: /?q=user/login/
 Disallow: /?q=user/logout/
 # Performance
 Disallow: /islandora/search/
+Disallow: /fr/islandora/search/
