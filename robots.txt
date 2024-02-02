@@ -100,5 +100,7 @@ Disallow: /?q=user/register/
 Disallow: /?q=user/login/
 Disallow: /?q=user/logout/
 # Performance
+Disallow: /islandora/object/*/view/history 
+Disallow: /fr/islandora/object/*/view/history 
 Disallow: /islandora/search/
 Disallow: /fr/islandora/search/
