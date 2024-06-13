@@ -15,7 +15,7 @@
         url = https://github.com/echidnacorp/block_islandora_options.git
 [submodule "sites/all/libraries/bookreader"]
         path = sites/all/libraries/bookreader
-        url = https://github.com/Islandora/internet_archive_bookreader.git
+        url = https://github.com/internetarchive/bookreader.git
 [submodule "sites/default/modules/custom/borealis_block_wrappers"]
         path = sites/default/modules/custom/borealis_block_wrappers
         url = https://github.com/cwrc/borealis_block_wrappers.git
